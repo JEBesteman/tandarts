@@ -6,11 +6,7 @@ import Home from "./Home";
 import Calendar from "./Calendar";
 import Day from "./Day";
 
-import generateRandomAppointments from "./utils";
-
-const appointments = generateRandomAppointments(70);
-
-const App = () => (
+const App = ({appointments}) => (
   <Router>
     <div>
       <nav>
