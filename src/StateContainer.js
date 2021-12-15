@@ -16,6 +16,8 @@ class StateContainer extends Component {
       dentists,
       appointments,
     };
+    console.log(this.state.dentists)
+    console.log(this.state.patients)
   }
 
   addPatient = () => {
@@ -55,7 +57,7 @@ class StateContainer extends Component {
     };
     console.log("new", newDentist);
     const newListDentist = [...this.state.dentists, newDentist];
-    this.setState({ dentist: newListDentist });
+    this.setState({ dentists: newListDentist });
     console.log(newListDentist);
   };
 

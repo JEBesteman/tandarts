@@ -593,23 +593,39 @@ const generateRandomAppointments = num =>
 
 
 //haalt alle appointments eruit die dezelfde tijd en dag zijn!!!
-let uniqueArray = []
+// let uniqueArray = []
 
-const appointmentArray = generateRandomAppointments(250);
-  for (let i = 0; i < 150; i++) {
+// const appointmentArray = generateRandomAppointments(250);
+//   for (let i = 0; i < 150; i++) {
   
-  uniqueArray = appointmentArray.reduce((acc, current) => {
-    const x = acc.find(item => item.day === current.day && item.time === current.time);
+//   uniqueArray = appointmentArray.reduce((acc, current) => {
+//     const x = acc.find(item => item.day === current.day && item.time === current.time);
+//     if (!x) {
+//       return acc.concat([current]);
+//     } else {
+//       return acc;
+//     } 
+//   }, []
+// );
+//  }
+// console.log("uni:", uniqueArray)
+
+
+
+const appointmentArray = generateRandomAppointments(300);
+
+  
+const uniqueArray = appointmentArray.reduce((acc, current) => {
+   const x = acc.find(item => item.day === current.day && item.time === current.time);
     if (!x) {
       return acc.concat([current]);
     } else {
       return acc;
     } 
   }, []
-);
- }
+).splice(0, 150);
+ 
 console.log("uni:", uniqueArray)
-
 export default uniqueArray
 
 
