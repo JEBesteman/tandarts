@@ -6,7 +6,7 @@ import Home from "./Home";
 import Calendar from "./Calendar";
 import Day from "./Day";
 
-const App = ({appointments}) => (
+const App = ({appointments, addPatient, addDentist}) => (
   <Router>
     <div>
       <nav>
@@ -32,6 +32,8 @@ const App = ({appointments}) => (
           </Route>
           <Route path="/">
             <Home />
+            <button onClick={()=> addPatient()}>add Patient</button>
+            <button onClick={()=> addDentist()}>add Dentist</button>
           </Route>
         </Switch>
       </main>
