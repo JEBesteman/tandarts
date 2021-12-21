@@ -18,12 +18,12 @@ const divideByDay = (appointments) => {
   return appointmentsByDay;
 };
 
-export default ({ appointments, addAppointment }) => {
+export default ({ appointments, addAppointment, removeAppointment }) => {
   const appointmentsByDay = divideByDay(appointments);
 
   const daysInMonthJSX = Object.values(appointmentsByDay)
     .map((appointmentsInDay, index) => (
-      <DayInMonth appointments={appointmentsInDay} key={index} />
+      <DayInMonth appointments={appointmentsInDay} key={index} removeAppointment={removeAppointment}/>
     ));
 
   return (

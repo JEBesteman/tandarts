@@ -66,11 +66,11 @@ class StateContainer extends Component {
     const patient = [...this.state.patients].find(
       (patient) => patient.id === 15 || patient.id === 12
     ); //backup als 15 er niet inzit
-    
+
     const assistent = [...this.state.assistents].find(
       (assistent) => assistent.id === 2
     ); //id=3 no assistent
-    
+
     const day = 1;
     const time = 13;
 
@@ -115,6 +115,17 @@ class StateContainer extends Component {
     }
   };
 
+  removeAppointment = (event) => {
+    const removeId = event.target.parentElement.id;
+    const removedAppointment = [...this.state.appointments].find(
+      (appointment) => appointment.id === removeId
+    ); //vind de juiste appointment
+    const updatedAppointmentList = [...this.state.appointments].filter(
+      (appointment) => appointment !== removedAppointment
+    ); //filtered verwijderde appointment eruit
+    this.setState({ appointments: updatedAppointmentList });
+  };
+
   render() {
     return (
       <div>
@@ -126,6 +137,7 @@ class StateContainer extends Component {
           addPatient={this.addPatient}
           addAppointment={this.addAppointment}
           addDentist={this.addDentist}
+          removeAppointment={this.removeAppointment}
         />
       </div>
     );
