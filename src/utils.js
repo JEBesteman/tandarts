@@ -573,7 +573,6 @@ const getRandomDay = () => {
     }
   }
 };
-// const getRandomDay = () => Math.floor(Math.random() * 28) + 1;
 
 export const generateRandomAppointment = () => ({
   id: uuidv4(),
@@ -591,30 +590,8 @@ const generateRandomAppointments = num =>
     .fill(0)
     .map(_ => generateRandomAppointment());
 
-
-//haalt alle appointments eruit die dezelfde tijd en dag zijn!!!
-// let uniqueArray = []
-
-// const appointmentArray = generateRandomAppointments(250);
-//   for (let i = 0; i < 150; i++) {
-  
-//   uniqueArray = appointmentArray.reduce((acc, current) => {
-//     const x = acc.find(item => item.day === current.day && item.time === current.time);
-//     if (!x) {
-//       return acc.concat([current]);
-//     } else {
-//       return acc;
-//     } 
-//   }, []
-// );
-//  }
-// console.log("uni:", uniqueArray)
-
-
-
 const appointmentArray = generateRandomAppointments(300);
 
-  
 const uniqueArray = appointmentArray.reduce((acc, current) => {
    const x = acc.find(item => item.day === current.day && item.time === current.time);
     if (!x) {
@@ -630,48 +607,8 @@ export default uniqueArray
 
 
 
-// export default generateRandomAppointments;
-
-// const appointmentArray = generateRandomAppointments(150);
-// console.log("array:" , appointmentArray)
-// let newArray = [];
-// let uniqueObject = {};
-// for (let i in appointmentArray) {
-//   let obj = appointmentArray[i]["day"] || appointmentArray[i]["time"];
-//   uniqueObject[obj] = appointmentArray[i];
-// }
-// for (let i in uniqueObject) {
-//   newArray.push(uniqueObject[i])
-// }
-// console.log("new", newArray)
-
-// export default newArray; 
 
 
 
 
 
-
-// Je kunt bij het genereren van deze array checks toevoegen voordat een nieuwe afspraak wordt toegevoegd aan de array. Ik zou aanraden om dit in een eigen functie te stoppen, aangezien je deze logica en checks weer nodig zal hebben als er bijvoorbeeld een nieuwe afspraak moet worden toegevoegd. Bij deze check kan je ook voor meerdere checks toevoegen en op meerdere / verschillende properties checken. Dit kan je doen zolang de lengte van deze array nog lager is dan een gewenst getal, bijvoorbeeld 150 (of een parameter). Een stukje (pseudo)code als opzet:
-// const getAppointments = (dentists, assistants, patients, num) => {
-//   const allAppointments = []
-//   //Voer het maken van nieuwe appointments uit tot de array lang genoeg is:
-//   while (allAppointments.length < num) {
-//     const newAppointment = generateRandomAppointment()
-//     //Hier logica om de afspraak alleen toe te voegen als hij dus niet ergens dubbel op 'boekt'
-//     if (isDoublures(newAppointment, allAppointments) === false) {
-//       allAppointments.push(newAppointment)
-
-//     }
-//   }
-//   return allAppointments
-// }
-// Echter, nu is het aan jou om de isDoublures functie te schrijven:
-// const isDoublures = (newAppointment, allAppointments) =>  {
-
-//   //logica om de properties van de nieuwe afspraak te checken tegen de bestaande afspraken.
-//   //Daarvoor kan je bijvoorbeeld .some() , filter(), map() op verschillende manieren gebruiken denk ik
-//   return true or false als totaal resultaat van isDoublures
-// }
-// De truck zit hem in deze opdracht weer in alles in kleine deel stappen op te splitsen en de verschillende stukjes logica te zien en scheiden^^.
-// ***Hij voegt dus niets toe als het een dubbele afspraak is (als het goed is), maar blijft door de while loop draai en een random afspraak genereren en toevoegen tot 150, of beter “num” bereikt is

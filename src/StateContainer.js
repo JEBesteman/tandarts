@@ -16,8 +16,8 @@ class StateContainer extends Component {
       dentists,
       appointments,
     };
-    console.log(this.state.dentists)
-    console.log(this.state.patients)
+    // console.log("alle afspraken in state:", this.state.appointments)
+    // console.log("alle patients in state:", this.state.patients)
   }
 
   addPatient = () => {
@@ -36,11 +36,10 @@ class StateContainer extends Component {
       email: email,
       sick: false,
     };
-    console.log("new", newPatient);
     const newListPatients = [...this.state.patients, newPatient];
     this.setState({ patients: newListPatients });
-    console.log(newListPatients);
   };
+
   addDentist = () => {
     const firstname = "Toos";
     const lastname = "Trekker";
@@ -55,10 +54,65 @@ class StateContainer extends Component {
       email: email,
       sick: false,
     };
-    console.log("new", newDentist);
     const newListDentist = [...this.state.dentists, newDentist];
     this.setState({ dentists: newListDentist });
-    console.log(newListDentist);
+  };
+
+  //moet nog controle of dentist en/of assistent vrij is, en tijd/dag niet al voorkomt....
+  addAppointment = () => {
+    const dentist = [...this.state.dentists].find(
+      (dentist) => dentist.id === 1
+    );
+    const patient = [...this.state.patients].find(
+      (patient) => patient.id === 15 || patient.id === 12
+    ); //backup als 15 er niet inzit
+    
+    const assistent = [...this.state.assistents].find(
+      (assistent) => assistent.id === 2
+    ); //id=3 no assistent
+    
+    const day = 1;
+    const time = 13;
+
+    const newAppointment = {
+      id: uuidv4(),
+      day,
+      time,
+      patient,
+      dentist,
+      assistent,
+    };
+    const checkDayTime = [...this.state.appointments].find(
+      (appointment) => appointment.day === day && appointment.time === time
+    );
+    console.log(checkDayTime);
+    if (checkDayTime) {
+      alert("kies een andere tijd en dag!");
+    }
+    const findDentist = [...this.state.appointments].find(
+      (appointment) =>
+        appointment.day === day &&
+        appointment.time === time &&
+        appointment.dentist === dentist
+    );
+    console.log(findDentist);
+    const findAssistent = [...this.state.appointments].find((appointment) => {
+      if (dentist !== undefined) {
+        //als er geen dentist is is er ook geen assistent..
+        return (
+          appointment.day === day &&
+          appointment.time === time &&
+          appointment.assistent === assistent
+        );
+      }
+      return false;
+    });
+    if (checkDayTime || findDentist || findAssistent) {
+      alert("sorry, deze afspraak kan je niet maken");
+    } else {
+      const newAppointmentList = [...this.state.appointments, newAppointment];
+      this.setState({ appointments: newAppointmentList });
+    }
   };
 
   render() {
@@ -70,6 +124,7 @@ class StateContainer extends Component {
           assistents={this.state.assistents}
           patients={this.state.patients}
           addPatient={this.addPatient}
+          addAppointment={this.addAppointment}
           addDentist={this.addDentist}
         />
       </div>
