@@ -13,18 +13,33 @@ const divideByDay = (appointments) => {
   });
 
   for (let day in appointmentsByDay) {
-    appointmentsByDay[day] = appointmentsByDay[day].sort((a, b) => a.time - b.time)
+    appointmentsByDay[day] = appointmentsByDay[day].sort(
+      (a, b) => a.time - b.time
+    );
   }
   return appointmentsByDay;
 };
 
-export default ({ appointments, addAppointment, removeAppointment, makeDentistSick }) => {
+export default ({
+  appointments,
+  addAppointment,
+  removeAppointment,
+  makeDentistSick,
+  makePatientSick,
+}) => {
   const appointmentsByDay = divideByDay(appointments);
 
-  const daysInMonthJSX = Object.values(appointmentsByDay)
-    .map((appointmentsInDay, index) => (
-      <DayInMonth appointments={appointmentsInDay} key={index} removeAppointment={removeAppointment} makeDentistSick={makeDentistSick}/>
-    ));
+  const daysInMonthJSX = Object.values(appointmentsByDay).map(
+    (appointmentsInDay, index) => (
+      <DayInMonth
+        appointments={appointmentsInDay}
+        key={index}
+        removeAppointment={removeAppointment}
+        makeDentistSick={makeDentistSick}
+        makePatientSick={makePatientSick}
+      />
+    )
+  );
 
   return (
     <div className="calendarview">

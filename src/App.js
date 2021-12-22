@@ -6,7 +6,15 @@ import Home from "./Home";
 import Calendar from "./Calendar";
 import Day from "./Day";
 
-const App = ({appointments, addPatient, addDentist, addAppointment, removeAppointment, makeDentistSick}) => (
+const App = ({
+  appointments,
+  addPatient,
+  addDentist,
+  addAppointment,
+  removeAppointment,
+  makeDentistSick,
+  makePatientSick,
+}) => (
   <Router>
     <div>
       <nav>
@@ -25,15 +33,21 @@ const App = ({appointments, addPatient, addDentist, addAppointment, removeAppoin
       <main>
         <Switch>
           <Route path="/calendar">
-            <Calendar appointments={appointments} addAppointment={addAppointment} removeAppointment={removeAppointment} makeDentistSick={makeDentistSick}/>
+            <Calendar
+              appointments={appointments}
+              addAppointment={addAppointment}
+              removeAppointment={removeAppointment}
+              makeDentistSick={makeDentistSick}
+              makePatientSick={makePatientSick}
+            />
           </Route>
           <Route path="/day">
-            <Day appointments={appointments.filter(app => app.day === 1)} />
+            <Day appointments={appointments.filter((app) => app.day === 1)} />
           </Route>
           <Route path="/">
             <Home />
-            <button onClick={()=> addPatient()}>add Patient</button>
-            <button onClick={()=> addDentist()}>add Dentist</button>
+            <button onClick={() => addPatient()}>add Patient</button>
+            <button onClick={() => addDentist()}>add Dentist</button>
           </Route>
         </Switch>
       </main>

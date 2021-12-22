@@ -141,6 +141,17 @@ class StateContainer extends Component {
     this.setState({ dentists: newDentistList });
   };
 
+  makePatientSick = (event) => {
+    const patientId = event.target.parentElement.id;
+    console.log(patientId)
+    const sickPatient = [...this.state.patients].find(patient => patient.id === Number(patientId))
+    console.log(sickPatient)
+    //remove all the appointments of this sickPatient
+    const newAppointmentsList = [...this.state.appointments].filter(appointment => appointment.patient !== sickPatient)
+    console.log(newAppointmentsList)
+    this.setState({appointments: newAppointmentsList})
+  }
+
   render() {
     return (
       <div>
@@ -154,6 +165,7 @@ class StateContainer extends Component {
           addDentist={this.addDentist}
           removeAppointment={this.removeAppointment}
           makeDentistSick={this.makeDentistSick}
+          makePatientSick={this.makePatientSick}
         />
       </div>
     );
