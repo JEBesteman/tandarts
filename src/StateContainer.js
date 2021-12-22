@@ -116,14 +116,29 @@ class StateContainer extends Component {
   };
 
   removeAppointment = (event) => {
-    const removeId = event.target.parentElement.id;
+    const appointmentId = event.target.parentElement.id;
     const removedAppointment = [...this.state.appointments].find(
-      (appointment) => appointment.id === removeId
+      (appointment) => appointment.id === appointmentId
     ); //vind de juiste appointment
     const updatedAppointmentList = [...this.state.appointments].filter(
       (appointment) => appointment !== removedAppointment
     ); //filtered verwijderde appointment eruit
     this.setState({ appointments: updatedAppointmentList });
+  };
+
+  makeDentistSick = (event) => {
+    const dentistId = event.target.parentElement.id;
+    const sickDentist = [...this.state.dentists].find(
+      (dentist) => dentist.id === Number(dentistId)
+    ); //of filter..
+  
+    const newDentistList = [...this.state.dentists].map((dentist) => {
+      if (dentist === sickDentist) {
+        dentist.sick = !dentist.sick;
+      }
+      return dentist;
+    });
+    this.setState({ dentists: newDentistList });
   };
 
   render() {
@@ -138,6 +153,7 @@ class StateContainer extends Component {
           addAppointment={this.addAppointment}
           addDentist={this.addDentist}
           removeAppointment={this.removeAppointment}
+          makeDentistSick={this.makeDentistSick}
         />
       </div>
     );
