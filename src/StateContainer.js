@@ -134,7 +134,8 @@ class StateContainer extends Component {
 
     const newDentistList = [...this.state.dentists].map((dentist) => {
       if (dentist === sickDentist) {
-        dentist.sick = !dentist.sick;
+         dentist.sick = !dentist.sick; //kan je ook weer dentist beter laten zijn (of met checkbox)
+        // dentist.sick = true;
       }
       return dentist;
     });
