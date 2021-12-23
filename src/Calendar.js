@@ -26,6 +26,7 @@ export default ({
   removeAppointment,
   makeDentistSick,
   makePatientSick,
+  moveAppointment,
 }) => {
   const appointmentsByDay = divideByDay(appointments);
 
@@ -37,6 +38,7 @@ export default ({
         removeAppointment={removeAppointment}
         makeDentistSick={makeDentistSick}
         makePatientSick={makePatientSick}
+        moveAppointment={moveAppointment}
       />
     )
   );

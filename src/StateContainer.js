@@ -131,7 +131,7 @@ class StateContainer extends Component {
     const sickDentist = [...this.state.dentists].find(
       (dentist) => dentist.id === Number(dentistId)
     ); //of filter..
-  
+
     const newDentistList = [...this.state.dentists].map((dentist) => {
       if (dentist === sickDentist) {
         dentist.sick = !dentist.sick;
@@ -143,14 +143,79 @@ class StateContainer extends Component {
 
   makePatientSick = (event) => {
     const patientId = event.target.parentElement.id;
-    console.log(patientId)
-    const sickPatient = [...this.state.patients].find(patient => patient.id === Number(patientId))
-    console.log(sickPatient)
+    console.log(patientId);
+    const sickPatient = [...this.state.patients].find(
+      (patient) => patient.id === Number(patientId)
+    );
+    console.log(sickPatient);
     //remove all the appointments of this sickPatient
-    const newAppointmentsList = [...this.state.appointments].filter(appointment => appointment.patient !== sickPatient)
-    console.log(newAppointmentsList)
-    this.setState({appointments: newAppointmentsList})
-  }
+    const newAppointmentsList = [...this.state.appointments].filter(
+      (appointment) => appointment.patient !== sickPatient
+    );
+    console.log(newAppointmentsList);
+    this.setState({ appointments: newAppointmentsList });
+  };
+  
+  moveAppointment = (event) => {
+    const appointmentId = event.target.parentElement.id;
+    const currentAppointment = [...this.state.appointments].filter(
+      (appointment) => appointment.id === appointmentId
+    );
+
+    //remove old appointment
+    const updatedAppointments = [...this.state.appointments].filter(
+      (appointment) => appointment.id !== appointmentId
+    );
+
+    //change appointment newDay and newTime
+    const changedAppointment = currentAppointment.map((appointment) => {
+      // console.log(appointment);
+      const dentist = appointment.dentist.id;
+      const assistent = appointment.assistent.id;
+      const newDay = 9;
+      const newTime = 16;
+
+      //check if dentist and/or assistent is available (en time/day)
+      const checkDayTime = [...this.state.appointments].find(
+        (appointment) =>
+          appointment.day === newDay && appointment.time === newTime
+      );
+      if (checkDayTime) {
+        alert("kies een andere tijd en dag!");
+      }
+
+      const findDentist = [...this.state.appointments].find(
+        (appointment) =>
+          appointment.day === newDay &&
+          appointment.time === newTime &&
+          appointment.dentist === dentist
+      );
+
+      const findAssistent = [...this.state.appointments].find((appointment) => {
+        if (dentist !== undefined) {
+          return (
+            appointment.day === newDay &&
+            appointment.time === newTime &&
+            appointment.assistent === assistent
+          );
+        }
+        return false;
+      });
+
+      if (checkDayTime || findDentist || findAssistent) {
+        alert("sorry, je kan deze afspraak niet naar deze tijd verplaatsen");
+        return appointment;
+      } else {
+        //aanpassen tijd en dag
+        appointment.day = newDay;
+        appointment.time = newTime;
+        return appointment;
+      }
+    });
+    // console.log(changedAppointment)
+    const newState = [...updatedAppointments, ...changedAppointment];
+    this.setState({ appointments: newState });
+  };
 
   render() {
     return (
@@ -166,6 +231,7 @@ class StateContainer extends Component {
           removeAppointment={this.removeAppointment}
           makeDentistSick={this.makeDentistSick}
           makePatientSick={this.makePatientSick}
+          moveAppointment={this.moveAppointment}
         />
       </div>
     );

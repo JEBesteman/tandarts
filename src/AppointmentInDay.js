@@ -8,6 +8,6 @@ export default ({ time, patient, dentist, assistent}) => (
     <div className="patient">Patiënt: {patient.firstname} {patient.lastname}</div>
     <div className="dentist">Tandarts: {dentist.firstname} {dentist.lastname} </div>
     <div className="assistent">Assistent: {assistent.firstname} {assistent.lastname}</div>
-    {console.log("is dentist sick?", dentist.id, dentist.sick)}
+    {/* {console.log("is dentist sick?", dentist.id, dentist.sick)} */}
   </li>
 );

@@ -14,6 +14,7 @@ const App = ({
   removeAppointment,
   makeDentistSick,
   makePatientSick,
+  moveAppointment
 }) => (
   <Router>
     <div>
@@ -39,6 +40,7 @@ const App = ({
               removeAppointment={removeAppointment}
               makeDentistSick={makeDentistSick}
               makePatientSick={makePatientSick}
+              moveAppointment={moveAppointment}
             />
           </Route>
           <Route path="/day">

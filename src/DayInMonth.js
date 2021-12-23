@@ -6,6 +6,7 @@ export default ({
   removeAppointment,
   makeDentistSick,
   makePatientSick,
+  moveAppointment,
 }) => {
   const appointmentsJSX = appointments.map(
     ({ time, patient, dentist, id }, index) => (
@@ -18,6 +19,7 @@ export default ({
         dentist={dentist}
         makeDentistSick={makeDentistSick}
         makePatientSick={makePatientSick}
+        moveAppointment={moveAppointment}
       />
     )
   );
